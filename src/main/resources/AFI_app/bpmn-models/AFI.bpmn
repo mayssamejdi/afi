@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="AFI" name="AFI" isExecutable="true">
+    <startEvent id="startEvent1" flowable:initiator="initiator" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="dossier" name="déposer dossier d'acquisition de terrain
+" flowable:assignee="investisseur" flowable:formKey="DacquisitionTerrain" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-FE10B5D7-A642-46F6-9C94-418A7AAAAB94" sourceRef="startEvent1" targetRef="dossier"></sequenceFlow>
+    <userTask id="verifRecevabilté" name="vérifier recevabilité du dossier pour la demande d'acquisition
+" flowable:assignee="commerciale" flowable:formKey="verifRecevabilite" flowable:formFieldValidation="true">
+      <extensionElements>
+        <flowable:formProperty id="new_property_1" type="string" writable="false"></flowable:formProperty>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-73D5772F-E5FA-4C9D-A53D-179C9F447656" sourceRef="dossier" targetRef="verifRecevabilté"></sequenceFlow>
+    <exclusiveGateway id="sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2"></exclusiveGateway>
+    <userTask id="avisRegional" name="saisir les avis pour les demandes d'acquisition
+" flowable:assignee="CommissionRégionale" flowable:formKey="avisR" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[commissionRegionale@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commission]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[comm]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="decisionAcquisition" name="saisir les décision demande d'acquisiton" flowable:assignee="affectation" flowable:formKey="decision" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[affectation@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[affectation]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[affectation]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-0382B986-08FE-4202-9768-2F13660A2DC4" sourceRef="avisRegional" targetRef="decisionAcquisition"></sequenceFlow>
+    <endEvent id="sid-40E38DB4-070B-4A42-A016-543EDF9896A0"></endEvent>
+    <sequenceFlow id="sid-2A42ACD1-42A6-472E-B77F-DABA06696779" sourceRef="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0" targetRef="sid-40E38DB4-070B-4A42-A016-543EDF9896A0"></sequenceFlow>
+    <sequenceFlow id="sid-13E409CB-BA87-40C2-94DB-38ED8B2CE423" sourceRef="verifRecevabilté" targetRef="sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2"></sequenceFlow>
+    <userTask id="sid-1ADFC904-E4F6-4ACE-B626-D416C28D3C59" name="ajouter à la liste des lots pour les commissions d'affectation 
+
+" flowable:assignee="commerciale" flowable:formKey="listedeslots" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-ED26CA22-1FEB-47A5-A911-D984B148EDEA" sourceRef="sid-1ADFC904-E4F6-4ACE-B626-D416C28D3C59" targetRef="avisRegional"></sequenceFlow>
+    <exclusiveGateway id="sid-6FA894BE-50D8-4F61-B807-782CA3B11478"></exclusiveGateway>
+    <exclusiveGateway id="sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A"></exclusiveGateway>
+    <sequenceFlow id="sid-962DD618-3D4C-4091-B88F-ECE8303DB980" name="ZI
+" sourceRef="sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A" targetRef="sid-894B4295-8EBD-46F9-8366-23CEC8D98186">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${naturedelazone == 'ZI'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-12489D62-4345-404D-BE05-03B5EC98A9E8" sourceRef="decisionAcquisition" targetRef="sid-6FA894BE-50D8-4F61-B807-782CA3B11478"></sequenceFlow>
+    <sequenceFlow id="sid-7C602D12-8C5F-415D-B8A6-451F2B87FD2B" name="Valider
+" sourceRef="sid-6FA894BE-50D8-4F61-B807-782CA3B11478" targetRef="sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision =='accord'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-A3725003-8ADD-4FB5-9127-DB4E522D5656" name="refuser
+" sourceRef="sid-6FA894BE-50D8-4F61-B807-782CA3B11478" targetRef="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision=='refus'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="sid-7544B6B3-BBA9-4217-9CE9-578B0EAF93FB" name="mail task
+" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[investisseur@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="text">
+          <flowable:string><![CDATA[yvkcfykcy]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:string><![CDATA[votre dossier est incomplet priere de nous fournir les compléments demandé]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-38C3C143-2F43-4689-9496-A5A5E58D0D96" sourceRef="sid-7544B6B3-BBA9-4217-9CE9-578B0EAF93FB" targetRef="dossier"></sequenceFlow>
+    <serviceTask id="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0" name="refus" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[investisseur@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:string><![CDATA[sorry!!]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="sid-574C6C65-E1FC-4A3E-B73F-F8856A549BB2" name="lettre de reservation
+
+" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[commercial@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:expression><![CDATA[la demande pour le lots ${numerodelot} est approuvé vous pouvez demander les complements de documents pour zDR]]></flowable:expression>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-22A8CE38-F361-42C2-A7A5-DCB30EFB9808" sourceRef="sid-574C6C65-E1FC-4A3E-B73F-F8856A549BB2" targetRef="sid-1FDA634B-C537-4206-8863-D8C519B5968E"></sequenceFlow>
+    <serviceTask id="sid-1FDA634B-C537-4206-8863-D8C519B5968E" name="lettre de reservation investisseur
+
+
+" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[investisseur@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:expression><![CDATA[Bonjour
+la commission d'affectation a validé votre demande pour le lot ${numerodelot} prière de visiter votre espace sur la plateforme et déposer la décision d'octroi d'avantage  
+
+AFI]]></flowable:expression>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <userTask id="sid-16BD98CD-1D56-46B8-A141-C753AE5B8951" name="choix entre prolongation ou depos
+" flowable:candidateUsers="investisseur" flowable:formKey="choixDP" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:user-info-email-investisseur xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur@yopmail.com]]></modeler:user-info-email-investisseur>
+        <modeler:user-info-firstname-investisseur xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:user-info-firstname-investisseur>
+        <modeler:user-info-lastname-investisseur xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:user-info-lastname-investisseur>
+        <modeler:activiti-idm-candidate-user xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-candidate-user>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-AF6275BD-98A6-40D1-A165-2123706067F9" sourceRef="sid-1FDA634B-C537-4206-8863-D8C519B5968E" targetRef="sid-16BD98CD-1D56-46B8-A141-C753AE5B8951"></sequenceFlow>
+    <userTask id="sid-945A5D8B-377F-48FC-A651-EB239E5424CC" name="valider decision de APII
+" flowable:assignee="commerciale" flowable:formKey="VF" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[commercial]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <serviceTask id="sid-894B4295-8EBD-46F9-8366-23CEC8D98186" name="lettre d'affectation" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[investisseur@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:string><![CDATA[congrats!!]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-063365A7-A790-417B-9B6B-EB66204D5D92" sourceRef="sid-4111116D-26A2-4C84-AB5D-16065F463485" targetRef="sid-945A5D8B-377F-48FC-A651-EB239E5424CC"></sequenceFlow>
+    <sequenceFlow id="sid-38E60BFA-D2EB-4ADA-9424-8CC794948073" sourceRef="sid-8319DE7A-C212-486E-8829-22161B427488" targetRef="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0"></sequenceFlow>
+    <sequenceFlow id="sid-330DCF3E-567C-49F7-A08C-E218AA14E851" name="ZDR
+" sourceRef="sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A" targetRef="sid-574C6C65-E1FC-4A3E-B73F-F8856A549BB2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${naturedelazone == 'ZDR'}]]></conditionExpression>
+    </sequenceFlow>
+    <boundaryEvent id="sid-8319DE7A-C212-486E-8829-22161B427488" attachedToRef="sid-16BD98CD-1D56-46B8-A141-C753AE5B8951" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>PT1M</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <exclusiveGateway id="sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8"></exclusiveGateway>
+    <userTask id="sid-4111116D-26A2-4C84-AB5D-16065F463485" name="deposer decision d'octroi d'avantage APII
+" flowable:assignee="investisseur" flowable:formKey="apii" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452" name="prolongation" flowable:assignee="investisseur" flowable:formKey="prolong" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur@yopmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[investisseur]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-D88FC160-08FF-4077-83DF-1A843FB9CE02" sourceRef="sid-16BD98CD-1D56-46B8-A141-C753AE5B8951" targetRef="sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8"></sequenceFlow>
+    <sequenceFlow id="sid-1D421268-1C4F-4A58-8701-02EF2A9FA4D0" sourceRef="sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8" targetRef="sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${choix == 'prolongation2'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-883308B5-9321-437F-B862-57880559577A" sourceRef="sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8" targetRef="sid-4111116D-26A2-4C84-AB5D-16065F463485">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${choix == 'depot2'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-AFC046E4-9B87-4F34-B7A0-06C367913CBE" sourceRef="sid-B7C4023E-91E5-419A-9CAF-D38AC924C251" targetRef="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0"></sequenceFlow>
+    <sequenceFlow id="sid-D8FCB932-BF7F-4F25-800C-26C61D6DDAA4" sourceRef="sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452" targetRef="sid-4111116D-26A2-4C84-AB5D-16065F463485"></sequenceFlow>
+    <boundaryEvent id="sid-B7C4023E-91E5-419A-9CAF-D38AC924C251" attachedToRef="sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>PT1M</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="sid-9160208C-D1F5-426A-B7E8-6C22B73B3843" sourceRef="sid-945A5D8B-377F-48FC-A651-EB239E5424CC" targetRef="sid-894B4295-8EBD-46F9-8366-23CEC8D98186"></sequenceFlow>
+    <endEvent id="sid-8C71F807-46BD-4326-9193-30B6C149C8A0"></endEvent>
+    <sequenceFlow id="sid-093D39F4-3876-45F4-8F37-C46E7541CE3D" sourceRef="sid-894B4295-8EBD-46F9-8366-23CEC8D98186" targetRef="sid-8C71F807-46BD-4326-9193-30B6C149C8A0"></sequenceFlow>
+    <serviceTask id="sid-BED1E3BB-65C2-488C-A4DB-5D4CF059CBBD" name="time out
+" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:string><![CDATA[investisseur@yopmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:string><![CDATA[ancetest123@gmail.com]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="text">
+          <flowable:string><![CDATA[vous avez depasser la prolongation
+votre dossier est refusé]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <boundaryEvent id="sid-7B99593B-C996-4603-BEBE-484DBAF8FD49" attachedToRef="sid-4111116D-26A2-4C84-AB5D-16065F463485" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>PT3M</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="sid-487158BF-914F-45E4-9D0C-95B300BB90D0" sourceRef="sid-7B99593B-C996-4603-BEBE-484DBAF8FD49" targetRef="sid-BED1E3BB-65C2-488C-A4DB-5D4CF059CBBD"></sequenceFlow>
+    <endEvent id="sid-F697391D-8D99-4A56-897F-4B06CCA9FB2F"></endEvent>
+    <sequenceFlow id="sid-4313ECD2-9134-454C-A96D-25EB47A7B5DA" sourceRef="sid-BED1E3BB-65C2-488C-A4DB-5D4CF059CBBD" targetRef="sid-F697391D-8D99-4A56-897F-4B06CCA9FB2F"></sequenceFlow>
+    <sequenceFlow id="sid-EA565AE9-92BE-4CCC-BD69-A8BC706FC2A3" name="disapproved
+" sourceRef="sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2" targetRef="sid-7544B6B3-BBA9-4217-9CE9-578B0EAF93FB">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${décision == 'incomplet'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="approved" name="approved
+" sourceRef="sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2" targetRef="sid-1ADFC904-E4F6-4ACE-B626-D416C28D3C59">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${décision == 'recevable'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_AFI">
+    <bpmndi:BPMNPlane bpmnElement="AFI" id="BPMNPlane_AFI">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="dossier" id="BPMNShape_dossier">
+        <omgdc:Bounds height="80.0" width="100.0" x="240.0" y="135.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="verifRecevabilté" id="BPMNShape_verifRecevabilté">
+        <omgdc:Bounds height="80.0" width="99.99999999999994" x="452.8" y="138.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2" id="BPMNShape_sid-E5FC8207-3AAC-49C1-9F0A-F3898E2B4BE2">
+        <omgdc:Bounds height="40.0" width="40.0" x="630.0" y="158.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="avisRegional" id="BPMNShape_avisRegional">
+        <omgdc:Bounds height="80.0" width="100.0" x="810.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="decisionAcquisition" id="BPMNShape_decisionAcquisition">
+        <omgdc:Bounds height="80.0" width="100.0" x="810.0" y="420.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-40E38DB4-070B-4A42-A016-543EDF9896A0" id="BPMNShape_sid-40E38DB4-070B-4A42-A016-543EDF9896A0">
+        <omgdc:Bounds height="28.0" width="28.0" x="1155.0" y="446.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-1ADFC904-E4F6-4ACE-B626-D416C28D3C59" id="BPMNShape_sid-1ADFC904-E4F6-4ACE-B626-D416C28D3C59">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-6FA894BE-50D8-4F61-B807-782CA3B11478" id="BPMNShape_sid-6FA894BE-50D8-4F61-B807-782CA3B11478">
+        <omgdc:Bounds height="40.0" width="40.0" x="955.0" y="440.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A" id="BPMNShape_sid-37779DE7-6229-4568-A72F-EBAD7CCF0B8A">
+        <omgdc:Bounds height="40.0" width="40.0" x="955.0" y="585.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-7544B6B3-BBA9-4217-9CE9-578B0EAF93FB" id="BPMNShape_sid-7544B6B3-BBA9-4217-9CE9-578B0EAF93FB">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0" id="BPMNShape_sid-8E03D898-67E2-4D6D-AF0A-E734D145D5A0">
+        <omgdc:Bounds height="80.0" width="100.0" x="990.0" y="285.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-574C6C65-E1FC-4A3E-B73F-F8856A549BB2" id="BPMNShape_sid-574C6C65-E1FC-4A3E-B73F-F8856A549BB2">
+        <omgdc:Bounds height="80.0" width="100.0" x="735.0" y="555.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-1FDA634B-C537-4206-8863-D8C519B5968E" id="BPMNShape_sid-1FDA634B-C537-4206-8863-D8C519B5968E">
+        <omgdc:Bounds height="80.0" width="100.0" x="525.0" y="540.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-16BD98CD-1D56-46B8-A141-C753AE5B8951" id="BPMNShape_sid-16BD98CD-1D56-46B8-A141-C753AE5B8951">
+        <omgdc:Bounds height="80.0" width="100.0" x="315.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-945A5D8B-377F-48FC-A651-EB239E5424CC" id="BPMNShape_sid-945A5D8B-377F-48FC-A651-EB239E5424CC">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-894B4295-8EBD-46F9-8366-23CEC8D98186" id="BPMNShape_sid-894B4295-8EBD-46F9-8366-23CEC8D98186">
+        <omgdc:Bounds height="80.0" width="100.0" x="795.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-8319DE7A-C212-486E-8829-22161B427488" id="BPMNShape_sid-8319DE7A-C212-486E-8829-22161B427488">
+        <omgdc:Bounds height="31.0" width="31.0" x="385.84716811305884" y="575.2088282866259"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8" id="BPMNShape_sid-2246C877-0A16-4E1C-8ADF-9A1C2FFB9FD8">
+        <omgdc:Bounds height="40.0" width="40.0" x="345.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-4111116D-26A2-4C84-AB5D-16065F463485" id="BPMNShape_sid-4111116D-26A2-4C84-AB5D-16065F463485">
+        <omgdc:Bounds height="80.0" width="100.0" x="435.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452" id="BPMNShape_sid-2D94DB39-7FC0-4807-89DA-BD9DDC0A7452">
+        <omgdc:Bounds height="80.0" width="100.0" x="165.0" y="640.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B7C4023E-91E5-419A-9CAF-D38AC924C251" id="BPMNShape_sid-B7C4023E-91E5-419A-9CAF-D38AC924C251">
+        <omgdc:Bounds height="31.0" width="31.0" x="191.0154644497716" y="705.4681711466756"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-8C71F807-46BD-4326-9193-30B6C149C8A0" id="BPMNShape_sid-8C71F807-46BD-4326-9193-30B6C149C8A0">
+        <omgdc:Bounds height="28.0" width="28.0" x="940.0" y="686.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BED1E3BB-65C2-488C-A4DB-5D4CF059CBBD" id="BPMNShape_sid-BED1E3BB-65C2-488C-A4DB-5D4CF059CBBD">
+        <omgdc:Bounds height="80.0" width="100.0" x="435.0" y="788.999999988079"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-7B99593B-C996-4603-BEBE-484DBAF8FD49" id="BPMNShape_sid-7B99593B-C996-4603-BEBE-484DBAF8FD49">
+        <omgdc:Bounds height="31.0" width="31.0" x="437.7627097190594" y="724.9356874259461"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F697391D-8D99-4A56-897F-4B06CCA9FB2F" id="BPMNShape_sid-F697391D-8D99-4A56-897F-4B06CCA9FB2F">
+        <omgdc:Bounds height="28.0" width="28.0" x="580.0" y="814.999999988079"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-7C602D12-8C5F-415D-B8A6-451F2B87FD2B" id="BPMNEdge_sid-7C602D12-8C5F-415D-B8A6-451F2B87FD2B">
+        <omgdi:waypoint x="975.5" y="479.4434700206755"></omgdi:waypoint>
+        <omgdi:waypoint x="975.5" y="585.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-38E60BFA-D2EB-4ADA-9424-8CC794948073" id="BPMNEdge_sid-38E60BFA-D2EB-4ADA-9424-8CC794948073">
+        <omgdi:waypoint x="416.56760713448193" y="585.0378262604521"></omgdi:waypoint>
+        <omgdi:waypoint x="990.0" y="345.3970079989655"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-063365A7-A790-417B-9B6B-EB66204D5D92" id="BPMNEdge_sid-063365A7-A790-417B-9B6B-EB66204D5D92">
+        <omgdi:waypoint x="534.95" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="700.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A3725003-8ADD-4FB5-9127-DB4E522D5656" id="BPMNEdge_sid-A3725003-8ADD-4FB5-9127-DB4E522D5656">
+        <omgdi:waypoint x="981.2943014705882" y="446.30882352941177"></omgdi:waypoint>
+        <omgdi:waypoint x="1014.5906735751296" y="364.95000000000005"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-487158BF-914F-45E4-9D0C-95B300BB90D0" id="BPMNEdge_sid-487158BF-914F-45E4-9D0C-95B300BB90D0">
+        <omgdi:waypoint x="459.0962810370179" y="755.9703809903973"></omgdi:waypoint>
+        <omgdi:waypoint x="470.811600921133" y="788.999999988079"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-12489D62-4345-404D-BE05-03B5EC98A9E8" id="BPMNEdge_sid-12489D62-4345-404D-BE05-03B5EC98A9E8">
+        <omgdi:waypoint x="909.9499999999861" y="460.2162337662338"></omgdi:waypoint>
+        <omgdi:waypoint x="955.4130434782489" y="460.4130434782608"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="approved" id="BPMNEdge_approved">
+        <omgdi:waypoint x="650.3967391304348" y="197.54258957654724"></omgdi:waypoint>
+        <omgdi:waypoint x="650.0051351351351" y="270.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-38C3C143-2F43-4689-9496-A5A5E58D0D96" id="BPMNEdge_sid-38C3C143-2F43-4689-9496-A5A5E58D0D96">
+        <omgdi:waypoint x="600.0" y="40.41237942122188"></omgdi:waypoint>
+        <omgdi:waypoint x="339.95000000000005" y="153.2958199356913"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-D8FCB932-BF7F-4F25-800C-26C61D6DDAA4" id="BPMNEdge_sid-D8FCB932-BF7F-4F25-800C-26C61D6DDAA4">
+        <omgdi:waypoint x="264.94999999999925" y="683.7"></omgdi:waypoint>
+        <omgdi:waypoint x="434.9999999999986" y="696.2962962962962"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-ED26CA22-1FEB-47A5-A911-D984B148EDEA" id="BPMNEdge_sid-ED26CA22-1FEB-47A5-A911-D984B148EDEA">
+        <omgdi:waypoint x="699.9499999998982" y="310.0"></omgdi:waypoint>
+        <omgdi:waypoint x="810.0" y="310.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-22A8CE38-F361-42C2-A7A5-DCB30EFB9808" id="BPMNEdge_sid-22A8CE38-F361-42C2-A7A5-DCB30EFB9808">
+        <omgdi:waypoint x="735.0" y="595.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="595.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="580.0"></omgdi:waypoint>
+        <omgdi:waypoint x="624.9499999999999" y="580.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-AF6275BD-98A6-40D1-A165-2123706067F9" id="BPMNEdge_sid-AF6275BD-98A6-40D1-A165-2123706067F9">
+        <omgdi:waypoint x="525.0" y="580.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="580.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="550.0"></omgdi:waypoint>
+        <omgdi:waypoint x="414.95000000000005" y="550.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9160208C-D1F5-426A-B7E8-6C22B73B3843" id="BPMNEdge_sid-9160208C-D1F5-426A-B7E8-6C22B73B3843">
+        <omgdi:waypoint x="699.9499999999999" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="795.0" y="700.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-EA565AE9-92BE-4CCC-BD69-A8BC706FC2A3" id="BPMNEdge_sid-EA565AE9-92BE-4CCC-BD69-A8BC706FC2A3">
+        <omgdi:waypoint x="650.3989898989898" y="158.3989898989899"></omgdi:waypoint>
+        <omgdi:waypoint x="650.0047738693468" y="79.95"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-883308B5-9321-437F-B862-57880559577A" id="BPMNEdge_sid-883308B5-9321-437F-B862-57880559577A">
+        <omgdi:waypoint x="384.4287556053811" y="680.5"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="680.5"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="435.0" y="700.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-73D5772F-E5FA-4C9D-A53D-179C9F447656" id="BPMNEdge_sid-73D5772F-E5FA-4C9D-A53D-179C9F447656">
+        <omgdi:waypoint x="339.94999999995014" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="388.9" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="388.9" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="452.8" y="178.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-13E409CB-BA87-40C2-94DB-38ED8B2CE423" id="BPMNEdge_sid-13E409CB-BA87-40C2-94DB-38ED8B2CE423">
+        <omgdi:waypoint x="552.75" y="178.16909275558567"></omgdi:waypoint>
+        <omgdi:waypoint x="630.4320652173914" y="178.43206521739134"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0382B986-08FE-4202-9768-2F13660A2DC4" id="BPMNEdge_sid-0382B986-08FE-4202-9768-2F13660A2DC4">
+        <omgdi:waypoint x="860.0" y="349.95000000000005"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="420.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-AFC046E4-9B87-4F34-B7A0-06C367913CBE" id="BPMNEdge_sid-AFC046E4-9B87-4F34-B7A0-06C367913CBE">
+        <omgdi:waypoint x="221.42072876877683" y="714.5903337327011"></omgdi:waypoint>
+        <omgdi:waypoint x="990.0" y="348.77425306664924"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-2A42ACD1-42A6-472E-B77F-DABA06696779" id="BPMNEdge_sid-2A42ACD1-42A6-472E-B77F-DABA06696779">
+        <omgdi:waypoint x="1040.0" y="364.95000000000005"></omgdi:waypoint>
+        <omgdi:waypoint x="1040.0" y="405.5"></omgdi:waypoint>
+        <omgdi:waypoint x="1169.0" y="405.5"></omgdi:waypoint>
+        <omgdi:waypoint x="1169.0" y="446.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-093D39F4-3876-45F4-8F37-C46E7541CE3D" id="BPMNEdge_sid-093D39F4-3876-45F4-8F37-C46E7541CE3D">
+        <omgdi:waypoint x="894.9499999999907" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="700.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4313ECD2-9134-454C-A96D-25EB47A7B5DA" id="BPMNEdge_sid-4313ECD2-9134-454C-A96D-25EB47A7B5DA">
+        <omgdi:waypoint x="534.9499999999907" y="828.999999988079"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="828.999999988079"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-330DCF3E-567C-49F7-A08C-E218AA14E851" id="BPMNEdge_sid-330DCF3E-567C-49F7-A08C-E218AA14E851">
+        <omgdi:waypoint x="955.5" y="605.5"></omgdi:waypoint>
+        <omgdi:waypoint x="895.0" y="605.5"></omgdi:waypoint>
+        <omgdi:waypoint x="895.0" y="595.0"></omgdi:waypoint>
+        <omgdi:waypoint x="834.9499999999999" y="595.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-D88FC160-08FF-4077-83DF-1A843FB9CE02" id="BPMNEdge_sid-D88FC160-08FF-4077-83DF-1A843FB9CE02">
+        <omgdi:waypoint x="365.0" y="589.95"></omgdi:waypoint>
+        <omgdi:waypoint x="365.0" y="660.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-1D421268-1C4F-4A58-8701-02EF2A9FA4D0" id="BPMNEdge_sid-1D421268-1C4F-4A58-8701-02EF2A9FA4D0">
+        <omgdi:waypoint x="345.4333333333334" y="680.4333333333334"></omgdi:waypoint>
+        <omgdi:waypoint x="264.95000000000005" y="680.1659468438539"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-FE10B5D7-A642-46F6-9C94-418A7AAAAB94" id="BPMNEdge_sid-FE10B5D7-A642-46F6-9C94-418A7AAAAB94">
+        <omgdi:waypoint x="129.9499953257868" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="177.5" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="177.5" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="240.0" y="175.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-962DD618-3D4C-4091-B88F-ECE8303DB980" id="BPMNEdge_sid-962DD618-3D4C-4091-B88F-ECE8303DB980">
+        <omgdi:waypoint x="965.051282051282" y="615.0274038461538"></omgdi:waypoint>
+        <omgdi:waypoint x="894.9499999999998" y="679.0858895705521"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
